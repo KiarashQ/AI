@@ -1,0 +1,13 @@
+asyncio==3.4.3
+fuzzywuzzy==0.18.0
+grpcio-tools==1.71.0
+langchain==0.3.24
+langchain-anthropic==0.3.12
+langchain-mistralai==0.2.10
+langchain-openai==0.3.14
+pymongo==4.11.1
+python-dotenv==1.1.0
+python-levenshtein==0.27.1
+pytz==2025.2
+scikit-learn==1.6.1
+transformers==4.49.0

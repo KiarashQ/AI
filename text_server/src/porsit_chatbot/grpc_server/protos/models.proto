@@ -1,0 +1,63 @@
+syntax = "proto3";
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+service ModelService {
+  rpc LLMResponse (GenerateRequest) returns (GenerateResponse);
+  rpc SummarizeConversation (SummarizeRequest) returns (GenerateResponse);
+  rpc ClassifyAll (ClassifyAllRequest) returns (CombinedResponse);
+  rpc ClassifyAll_LC (ClassifyRequestLC) returns (CombinedResponse);
+}
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+message GenerateRequest {
+  string context = 1;
+  string prompt = 2;
+  string model_choice = 3;
+  string client_name = 4;
+}
+
+message GenerateResponse {
+  string response = 1;
+}
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+message SummarizeRequest {
+    string conversation_history = 1;
+    string client_name = 2;
+}
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+message ClassifyAllRequest {
+  string text = 1;
+}
+
+message ClassifyRequestLC {
+  string text = 1;
+  string conversation_history = 2;
+  string client_name = 3;
+}
+
+message CombinedResponse {
+  IntentResponse intent_response = 1;
+  EntityResponse entity_response = 2;
+}
+
+message IntentResponse {
+  string intent = 1;
+  float confidence = 2;
+}
+
+message EntityResponse {
+  repeated Entity entities = 1;
+}
+
+message Entity {
+  string word = 1;
+  string entity = 2;
+  int32 start = 3;
+  int32 end = 4;
+}

@@ -1,0 +1,62 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+env/
+venv/
+ENV/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg
+pip-delete-this-directory.txt
+celerybeat-schedule.*
+*.manifest
+*.spec
+
+# Pytest files
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+nosetests.xml
+coverage.xml
+*,cover
+*.log.[0-9]*
+
+# SageMaker instances
+.ipynb_checkpoints
+
+# Environments and Secrets
+myenv/
+.env
+*.env
+
+# Log files
+logs/
+
+# Profile files / User Data
+profiles/
+
+# IDE / Editor configuration
+.vscode/
+.VSCodeCounter/
+.idea/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Temporary / Swap files
+*.swp
+*.swo
+*~

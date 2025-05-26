@@ -1,0 +1,5 @@
+asyncio==3.4.3
+grpcio-tools==1.71.0
+langchain-openai==0.3.14
+python-dotenv==1.1.0
+python-levenshtein==0.27.1

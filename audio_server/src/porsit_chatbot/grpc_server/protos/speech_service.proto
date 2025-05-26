@@ -1,0 +1,45 @@
+// src/porsit_chatbot/grpc_server/protos/speech_service.proto
+syntax = "proto3";
+
+package speech_service;
+
+option go_package = ".;speech_service_pb";
+option py_generic_services = true;
+
+// --- Speech-to-Text (STT) ---
+message TranscribeRequest {
+  bytes audio_data = 1;       // Raw audio bytes
+  string audio_format = 2;    // e.g., "wav", "mp3", "ogg", "opus"
+  string language_code = 3;   // e.g., "fa-IR", "en-US" (BCP-47 format)
+  // Optional: Specifies the provider and model, e.g., "openai/whisper-1", "speechmatics/batch".
+  optional string stt_model_choice = 4;
+}
+
+
+message TranscriptionResponse {
+  string transcript = 1;
+  float confidence = 2;
+  string error_message = 3;
+}
+
+// --- Text-to-Speech (TTS) ---
+message SynthesizeRequest {
+  string text = 1;
+  string language_code = 2;   // e.g., "fa-IR", "en"
+  optional string voice_name = 3; // Provider-specific voice ID (e.g., for OpenAI: "alloy", "echo")
+  string audio_format = 4;    // Desired output audio format, e.g., "mp3", "opus", "wav"
+  // Optional: Specifies the provider and model, e.g., "openai/tts-1", "openai/tts-1-hd".
+  optional string tts_model_choice = 5;
+}
+
+message SynthesisResponse {
+  bytes audio_data = 1;
+  string audio_format = 2; // Actual MIME type of the audio_data, e.g., "audio/mpeg", "audio/opus"
+  string error_message = 3;
+}
+
+// --- Service Definition ---
+service SpeechService {
+  rpc TranscribeAudio(TranscribeRequest) returns (TranscriptionResponse);
+  rpc SynthesizeSpeech(SynthesizeRequest) returns (SynthesisResponse);
+}
